@@ -1,5 +1,5 @@
 {
-  "name": "ajs",
+  "name": "ahj__hw_6.1",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -17,7 +17,7 @@
     "preshow:dist": "npm run build",
     "show:dist": "live-server dist"
   },
-  "author": "coursar",
+  "author": "Vasya24",
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -41,5 +41,6 @@
   },
   "dependencies": {
     "core-js": "^3.6.4"
-  }
+  },
+  "repository": "https://github.com/Vasya24/ahj__hw_6.1.git"
 }
