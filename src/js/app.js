@@ -1,31 +1,41 @@
-let cards = document.getElementsByClassName('task_card');
-let lists = document.getElementsByClassName('task_list')
-for (let card of cards) {
-card.addEventListener('dragstart', (e) => {
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('Text', e.target.getAttribute('id'))
-    e.dataTransfer.setDragImage(e.target,10,10);
-    return true;
-});
 
-card.addEventListener('dragend', () => {
-    console.log('Эх тыыыы')
-})
+let cards = document.querySelectorAll('.task_list_item');
+let lists = document.querySelectorAll('.task_list');
+let dragged = null;
 
+cards.forEach((card) => {
+card.addEventListener('dragstart', dragstart);
+card.addEventListener('dragend', dragend)
+card.addEventListener('drop', drop)
+const dragstart = function() {
+    dragged = card
+    setTimeout(() => {
+        this.classList.add('hide')
+    }, 0)
 }
-for (let list of lists) {
-list.addEventListener('dragenter', (e) => {
-    e.preventDefault();
-    return true
-    
-});
-list.addEventListener('dragover', (e) => {
-    e.preventDefault();
-})
-list.addEventListener('drop', (e) => {
-    let data = e.dataTransfer.getData('Text');
-    e.target.appendChild(document.getElementById(data));
-    e.stopPropagation();
-    return false
-})
+
+const dragend = function() {
+    this.classList.remove('hide')
 }
+const dragover = function(e) {
+    e.preventDefault()
+}
+const dragenter = function(e) {
+    e.preventDefault();
+    this.classList.add('hovered')
+}
+const dragleave = function() {
+    this.classList.remove('hovered')
+}
+const drop = function() {
+    this.append(card);
+    this.classList.remove('hovered')
+}
+
+lists.forEach((list) => {
+    list.addEventListener('dragover', dragover);
+    list.addEventListener('dragenter', dragenter);
+    list.addEventListener('dragleave', dragleave)
+    list.addEventListener('drop', drop)
+})
+})
