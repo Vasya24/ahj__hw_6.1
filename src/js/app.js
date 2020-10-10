@@ -20,16 +20,18 @@ for (let i = 0; i < listItems.length; i++) {
 		}, 0);
 	})
 
-	for (let j = 0; j < lists.length; j ++) {
+	for (let j = 0; j < lists.length; j++) {
 		const list = lists[j];
 
 		list.addEventListener('dragover', function(e) {
-			e.preventDefault();
+            e.preventDefault();
+
 		});
 		
 		list.addEventListener('dragenter', function(e) {
 			e.preventDefault();
-			this.classList.add('hovered')
+            this.classList.add('hovered')
+
 		});
 
 		list.addEventListener('dragleave', function() {
@@ -38,7 +40,8 @@ for (let i = 0; i < listItems.length; i++) {
 
 		list.addEventListener('drop', function() {
             this.append(draggedItem);
-            this.classList.remove('hovered')
+            this.classList.remove('hovered');
+
 		});
 	}
 }

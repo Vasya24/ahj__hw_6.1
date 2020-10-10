@@ -13,11 +13,12 @@ li {
     display: inline-block;
     width: 30%;
     background-color: #D5DBDE;
-    width: 40vh;
+    width: 230px;;
     padding: 1%;
     margin: 1%;
     border-radius: 25px;
     border: 1px solid black;
+    z-index: 3;
 }
 
 .task_list {
@@ -33,4 +34,22 @@ li {
 
 .hovered {
     background: rgb(19, 255, 150, 0.5)
+}
+
+.task_list_header {
+    text-align: center;
+}
+
+.new_item {
+    position: relative;
+    left: 70%;
+    padding: 1%;
+    background-color: teal;
+    color: whitesmoke
+}
+
+.todo::after {
+    content: "+ Добавить";
+    position: relative;
+    left: 20%
 }
