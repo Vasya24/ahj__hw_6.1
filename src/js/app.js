@@ -1,41 +1,44 @@
+const listItems = document.querySelectorAll('.task_list_item');
+const lists = document.querySelectorAll('.task_list');
 
-let cards = document.querySelectorAll('.task_list_item');
-let lists = document.querySelectorAll('.task_list');
-let dragged = null;
+let draggedItem = null;
 
-cards.forEach((card) => {
-card.addEventListener('dragstart', dragstart);
-card.addEventListener('dragend', dragend)
-card.addEventListener('drop', drop)
-const dragstart = function() {
-    dragged = card
-    setTimeout(() => {
-        this.classList.add('hide')
-    }, 0)
-}
+for (let i = 0; i < listItems.length; i++) {
+	const item = listItems[i];
 
-const dragend = function() {
-    this.classList.remove('hide')
-}
-const dragover = function(e) {
-    e.preventDefault()
-}
-const dragenter = function(e) {
-    e.preventDefault();
-    this.classList.add('hovered')
-}
-const dragleave = function() {
-    this.classList.remove('hovered')
-}
-const drop = function() {
-    this.append(card);
-    this.classList.remove('hovered')
-}
+	item.addEventListener('dragstart', function () {
+		draggedItem = item;
+		setTimeout(function() {
+			item.classList.add('hide')
+		}, 0)
+	});
 
-lists.forEach((list) => {
-    list.addEventListener('dragover', dragover);
-    list.addEventListener('dragenter', dragenter);
-    list.addEventListener('dragleave', dragleave)
-    list.addEventListener('drop', drop)
-})
-})
+	item.addEventListener('dragend', function() {
+		setTimeout(function() {
+			draggedItem.style.display = 'block';
+			draggedItem = null;
+		}, 0);
+	})
+
+	for (let j = 0; j < lists.length; j ++) {
+		const list = lists[j];
+
+		list.addEventListener('dragover', function(e) {
+			e.preventDefault();
+		});
+		
+		list.addEventListener('dragenter', function(e) {
+			e.preventDefault();
+			this.classList.add('hovered')
+		});
+
+		list.addEventListener('dragleave', function() {
+			this.classList.remove('hovered');
+		});
+
+		list.addEventListener('drop', function() {
+            this.append(draggedItem);
+            this.classList.remove('hovered')
+		});
+	}
+}
